@@ -1,0 +1,8 @@
+# Editor / IDE
+.cursor/
+
+# BMad framework
+_bmad/
+
+# OS
+.DS_Store

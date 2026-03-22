@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://salarywisecalc.com/sitemap.xml
