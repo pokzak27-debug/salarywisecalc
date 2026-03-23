@@ -1,0 +1,80 @@
+{
+  "pages": [
+    {"rate": 1000, "unit": "shilling", "country": "kenya"},
+    {"rate": 5000, "unit": "naira", "country": "nigeria"},
+    {"rate": 200, "unit": "peso", "country": "philippines"},
+    {"rate": 200, "unit": "rand", "country": "south-africa"}
+  ],
+  "pageTypes": {
+    "hourly-after-tax-country": {
+      "slugPattern": "{rate}-{unit}-per-hour-after-tax-{country}.html",
+      "calculator": "hourly-to-salary",
+      "sections": ["key_result", "calculator", "summary", "explanation", "examples", "faq", "related"]
+    },
+    "hourly-to-yearly": {
+      "slugPattern": "{rate}-dollar-an-hour-is-how-much-a-year.html",
+      "calculator": "hourly-to-salary",
+      "sections": ["highlight", "calculator", "explanation", "faq", "related"]
+    },
+    "salary-after-tax": {
+      "slugPattern": "{amount}k-salary-after-tax.html",
+      "calculator": "salary-to-hourly",
+      "sections": ["key_result", "calculator", "summary", "faq", "related"]
+    }
+  },
+  "countries": {
+    "kenya": {
+      "name": "Kenya",
+      "currency": "KES",
+      "symbol": "KES ",
+      "slug": "kenya",
+      "taxAuthority": "KRA",
+      "deductions": ["PAYE", "NSSF", "SHIF", "Housing Levy"],
+      "calculatorPage": "salary-calculator-kenya.html"
+    },
+    "nigeria": {
+      "name": "Nigeria",
+      "currency": "NGN",
+      "symbol": "₦",
+      "slug": "nigeria",
+      "taxAuthority": "FIRS",
+      "deductions": ["PAYE", "pension"],
+      "calculatorPage": "salary-calculator-nigeria.html"
+    },
+    "philippines": {
+      "name": "Philippines",
+      "currency": "PHP",
+      "symbol": "₱",
+      "slug": "philippines",
+      "taxAuthority": "BIR",
+      "deductions": ["BIR tax", "SSS", "PhilHealth", "Pag-IBIG"],
+      "calculatorPage": "salary-calculator-philippines.html"
+    },
+    "south-africa": {
+      "name": "South Africa",
+      "currency": "ZAR",
+      "symbol": "R",
+      "slug": "south-africa",
+      "taxAuthority": "SARS",
+      "deductions": ["PAYE", "UIF", "pension"],
+      "calculatorPage": "salary-calculator-south-africa.html"
+    }
+  },
+  "relatedLinks": {
+    "core": [
+      {"href": "index.html", "text": "Salary Calculator"},
+      {"href": "hourly-to-salary.html", "text": "Hourly to Salary"},
+      {"href": "salary-to-hourly.html", "text": "Salary to Hourly"},
+      {"href": "salary-guides.html", "text": "Salary Guides"},
+      {"href": "sitemap.html", "text": "HTML Sitemap"}
+    ],
+    "guides": [
+      {"href": "gross-vs-net-salary.html", "text": "Gross vs net salary"},
+      {"href": "weekly-vs-biweekly-vs-monthly-pay.html", "text": "Weekly vs biweekly vs monthly pay"},
+      {"href": "60000-salary-after-tax.html", "text": "$60k after tax"},
+      {"href": "60000-a-year-is-how-much-a-month.html", "text": "$60k a year monthly"},
+      {"href": "50000-a-year-is-how-much-a-month.html", "text": "$50k a year monthly"},
+      {"href": "compare-salary-offers-guide.html", "text": "Compare Salary Offers"}
+    ]
+  }
+}

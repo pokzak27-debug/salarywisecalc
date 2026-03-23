@@ -20,7 +20,12 @@
     return 0.37;
   }
 
-  function formatCurrency(num) {
+  function formatCurrency(num, symbol) {
+    if (symbol) {
+      if (num === null || num === undefined || isNaN(num)) return '—';
+      const formatted = new Intl.NumberFormat('en', { maximumFractionDigits: 0, minimumFractionDigits: 0 }).format(Math.round(num));
+      return symbol + formatted;
+    }
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -46,11 +51,13 @@
     if (!container) return;
 
     const type = container.dataset.calculator;
+    const currencySymbol = container.dataset.currencySymbol || null;
     const hourlyInput = container.querySelector('[data-input="hourly"]');
     const yearlyInput = container.querySelector('[data-input="yearly"]');
 
     const outGrossYearly = container.querySelector('[data-output="gross-yearly"]');
     const outGrossHourly = container.querySelector('[data-output="gross-hourly"]');
+    const outMonthlyGross = container.querySelector('[data-output="monthly-gross"]');
     const outTax = container.querySelector('[data-output="tax-estimate"]');
     const outNet = container.querySelector('[data-output="net-yearly"]');
 
@@ -80,13 +87,17 @@
       }
 
       const grossAnnual = yearly || (hourly > 0 ? calculateYearlyFromHourly(hourly) : 0);
-      const taxAmount = estimateTax(grossAnnual);
+      const noTax = container.dataset.noTax === 'true';
+      const taxAmount = noTax ? 0 : estimateTax(grossAnnual);
       const netAnnual = grossAnnual - taxAmount;
 
-      if (outGrossYearly) outGrossYearly.textContent = formatCurrency(grossAnnual);
-      if (outGrossHourly) outGrossHourly.textContent = formatCurrency(hourly);
-      if (outTax) outTax.textContent = formatCurrency(taxAmount);
-      if (outNet) outNet.textContent = formatCurrency(netAnnual);
+      const fmt = (n) => formatCurrency(n, currencySymbol);
+
+      if (outGrossYearly) outGrossYearly.textContent = fmt(grossAnnual);
+      if (outGrossHourly) outGrossHourly.textContent = fmt(hourly);
+      if (outMonthlyGross && grossAnnual > 0) outMonthlyGross.textContent = fmt(grossAnnual / 12);
+      if (outTax) outTax.textContent = fmt(taxAmount);
+      if (outNet) outNet.textContent = fmt(netAnnual);
 
       isUpdating = false;
     }

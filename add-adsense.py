@@ -5,7 +5,7 @@ import os
 import re
 
 # Replace with your AdSense publisher ID and ad slot IDs after approval
-ADSENSE_CLIENT = "ca-pub-XXXXXXXXXXXXXXXX"
+ADSENSE_CLIENT = "ca-pub-7502486843743422"
 AD_SLOT_TOP = "1111111111"
 AD_SLOT_MID = "2222222222"
 AD_SLOT_FOOTER = "3333333333"

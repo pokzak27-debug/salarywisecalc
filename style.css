@@ -417,6 +417,14 @@ main {
   text-decoration: underline;
 }
 
+.disclaimer {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  border-top: 1px solid var(--color-border);
+}
+
 /* FAQ section */
 .faq-section {
   margin-top: 1.5rem;
