@@ -10,6 +10,7 @@ from pathlib import Path
 BUILD_DIR = Path(__file__).parent
 PROJECT_ROOT = BUILD_DIR.parent
 SPECS_FILE = BUILD_DIR / "page-specs.json"
+EXISTING_HTML = {p.name for p in PROJECT_ROOT.glob("*.html")}
 
 HOURS_PER_WEEK = 40
 WEEKS_PER_YEAR = 52
@@ -38,6 +39,12 @@ def estimate_net(gross):
 
 def fmt(n):
     return f"${n:,.0f}"
+
+def only_existing(links):
+    return [(href, text) for href, text in links if href in EXISTING_HTML]
+
+def render_related(links):
+    return "".join(f'<li><a href="{href}">{text}</a></li>\n          ' for href, text in links)
 
 COMMON_HEAD = '''<!DOCTYPE html>
 <html lang="en">
@@ -179,10 +186,15 @@ def build_hourly_yearly(rate):
     all_rates = sorted(set(all_rates))
     idx = all_rates.index(rate) if rate in all_rates else 0
     nearby = [r for r in all_rates[max(0,idx-3):idx+6] if r != rate][:8]
-    related = "".join(f'<li><a href="{r}-dollar-an-hour-is-how-much-a-year.html">${r} an hour</a></li>\n          ' for r in nearby)
-    related += '<li><a href="index.html">Salary Calculator</a></li>\n          <li><a href="hourly-to-salary.html">Hourly to Salary</a></li>\n          <li><a href="salary-guides.html">Salary Guides</a></li>'
+    related_links = [(f"{r}-dollar-an-hour-is-how-much-a-year.html", f"${r} an hour") for r in nearby]
+    related_links.extend([
+        ("index.html", "Salary Calculator"),
+        ("hourly-to-salary.html", "Hourly to Salary"),
+        ("salary-guides.html", "Salary Guides"),
+    ])
     if rate in [25, 30, 40]:
-        related += f'\n          <li><a href="{rate}-an-hour-after-tax.html">${rate}/hr after tax</a></li>'
+        related_links.append((f"{rate}-an-hour-after-tax.html", f"${rate}/hr after tax"))
+    related = render_related(only_existing(related_links))
 
     faq_ld = json.dumps({"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}} for q,a in faqs]})
 
@@ -266,8 +278,13 @@ def build_salary_after_tax(amount):
         return f"{s//1000}k-salary-after-tax.html" if s >= 100000 else f"{s}-salary-after-tax.html"
     def sal_text(s):
         return f"${s//1000}k salary after tax" if s >= 10000 else f"${s:,} salary after tax"
-    related = "".join(f'<li><a href="{sal_slug(s)}">{sal_text(s)}</a></li>\n          ' for s in nearby)
-    related += '<li><a href="salary-guides.html">Salary Guides</a></li>\n          <li><a href="salary-after-tax-usa.html">Salary after tax USA</a></li>\n          <li><a href="index.html">Salary Calculator</a></li>'
+    related_links = [(sal_slug(s), sal_text(s)) for s in nearby]
+    related_links.extend([
+        ("salary-guides.html", "Salary Guides"),
+        ("salary-after-tax-usa.html", "Salary after tax USA"),
+        ("index.html", "Salary Calculator"),
+    ])
+    related = render_related(only_existing(related_links))
 
     faq_ld = json.dumps({"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}} for q,a in faqs]})
 
@@ -341,7 +358,16 @@ def build_monthly_pay(rate):
          "State tax, 401(k), health insurance, overtime, and filing status all affect your actual paycheck."),
     ]
 
-    related = f'<li><a href="{rate}-dollar-an-hour-is-how-much-a-year.html">${rate} an hour to yearly</a></li>\n          <li><a href="{rate}-an-hour-biweekly-pay.html">${rate} an hour biweekly</a></li>\n          <li><a href="25-an-hour-monthly-pay.html">$25 an hour monthly</a></li>\n          <li><a href="30-an-hour-monthly-pay.html">$30 an hour monthly</a></li>\n          <li><a href="60000-a-year-is-how-much-a-month.html">$60k a year monthly</a></li>\n          <li><a href="salary-guides.html">Salary Guides</a></li>\n          <li><a href="index.html">Salary Calculator</a></li>'
+    related_links = [
+        (f"{rate}-dollar-an-hour-is-how-much-a-year.html", f"${rate} an hour to yearly"),
+        (f"{rate}-an-hour-biweekly-pay.html", f"${rate} an hour biweekly"),
+        ("25-an-hour-monthly-pay.html", "$25 an hour monthly"),
+        ("30-an-hour-monthly-pay.html", "$30 an hour monthly"),
+        ("60000-a-year-is-how-much-a-month.html", "$60k a year monthly"),
+        ("salary-guides.html", "Salary Guides"),
+        ("index.html", "Salary Calculator"),
+    ]
+    related = render_related(only_existing(related_links))
 
     faq_ld = json.dumps({"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}} for q,a in faqs]})
 
@@ -415,7 +441,16 @@ def build_biweekly_pay(rate):
          "State tax, 401(k), health insurance, overtime, and filing status all affect your actual paycheck."),
     ]
 
-    related = f'<li><a href="{rate}-dollar-an-hour-is-how-much-a-year.html">${rate} an hour to yearly</a></li>\n          <li><a href="{rate}-an-hour-monthly-pay.html">${rate} an hour monthly</a></li>\n          <li><a href="25-an-hour-biweekly-pay.html">$25 an hour biweekly</a></li>\n          <li><a href="30-an-hour-biweekly-pay.html">$30 an hour biweekly</a></li>\n          <li><a href="60000-a-year-is-how-much-a-month.html">$60k a year monthly</a></li>\n          <li><a href="salary-guides.html">Salary Guides</a></li>\n          <li><a href="index.html">Salary Calculator</a></li>'
+    related_links = [
+        (f"{rate}-dollar-an-hour-is-how-much-a-year.html", f"${rate} an hour to yearly"),
+        (f"{rate}-an-hour-monthly-pay.html", f"${rate} an hour monthly"),
+        ("25-an-hour-biweekly-pay.html", "$25 an hour biweekly"),
+        ("30-an-hour-biweekly-pay.html", "$30 an hour biweekly"),
+        ("60000-a-year-is-how-much-a-month.html", "$60k a year monthly"),
+        ("salary-guides.html", "Salary Guides"),
+        ("index.html", "Salary Calculator"),
+    ]
+    related = render_related(only_existing(related_links))
 
     faq_ld = json.dumps({"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}} for q,a in faqs]})
 

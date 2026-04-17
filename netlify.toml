@@ -2,6 +2,210 @@
 [build]
   publish = "."
 
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/100k-salary-after-tax"
+  to = "/100k-salary-after-tax.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/100000-salary-after-tax"
+  to = "/100k-salary-after-tax.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/100000-salary-after-tax.html"
+  to = "/100k-salary-after-tax.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/120k-salary-after-tax"
+  to = "/120k-salary-after-tax.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/20-dollar-an-hour-is-how-much-a-year"
+  to = "/20-dollar-an-hour-is-how-much-a-year.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/25-dollar-an-hour-is-how-much-a-year"
+  to = "/25-dollar-an-hour-is-how-much-a-year.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/30-dollar-an-hour-is-how-much-a-year"
+  to = "/30-dollar-an-hour-is-how-much-a-year.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/40-dollar-an-hour-is-how-much-a-year"
+  to = "/40-dollar-an-hour-is-how-much-a-year.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/50-dollar-an-hour-is-how-much-a-year"
+  to = "/50-dollar-an-hour-is-how-much-a-year.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/60-dollar-an-hour-is-how-much-a-year"
+  to = "/60-dollar-an-hour-is-how-much-a-year.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/70000-salary-after-tax"
+  to = "/70000-salary-after-tax.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/80000-salary-after-tax"
+  to = "/80000-salary-after-tax.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/90000-salary-after-tax"
+  to = "/90000-salary-after-tax.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/about"
+  to = "/about.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/compare-salary-offers-guide"
+  to = "/compare-salary-offers-guide.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/contact"
+  to = "/contact.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/gross-vs-net-salary"
+  to = "/gross-vs-net-salary.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/hourly-to-salary"
+  to = "/hourly-to-salary.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/how-salary-conversion-works"
+  to = "/how-salary-conversion-works.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/privacy-policy"
+  to = "/privacy-policy.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/salary-after-tax-usa"
+  to = "/salary-after-tax-usa.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/salary-calculator-australia"
+  to = "/salary-calculator-australia.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/salary-calculator-canada"
+  to = "/salary-calculator-canada.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/salary-calculator-uk"
+  to = "/salary-calculator-uk.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/salary-calculator-usa"
+  to = "/salary-calculator-usa.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/salary-comparison-guides"
+  to = "/salary-comparison-guides.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/salary-guides"
+  to = "/salary-guides.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/salary-negotiation-guide"
+  to = "/salary-negotiation-guide.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/salary-raise-calculator-guide"
+  to = "/salary-raise-calculator-guide.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/salary-to-hourly"
+  to = "/salary-to-hourly.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sitemap"
+  to = "/sitemap.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/terms"
+  to = "/terms.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/weekly-vs-biweekly-vs-monthly-pay"
+  to = "/weekly-vs-biweekly-vs-monthly-pay.html"
+  status = 301
+  force = true
+
 [[headers]]
   for = "/*"
   [headers.values]

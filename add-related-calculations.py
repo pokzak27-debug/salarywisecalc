@@ -3,10 +3,12 @@
 
 import os
 import re
+from pathlib import Path
 
 HOURLY_RATES = [12, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 42, 45, 50, 60, 70, 80]
 HOURLY_AFTER_TAX = [25, 30, 35, 40, 50]
 SALARY_AFTER_TAX = ["70000", "80000", "90000", "100k", "120k"]
+EXISTING_HTML = {p.name for p in Path(".").glob("*.html")}
 
 
 def slug_hourly(r):
@@ -32,16 +34,19 @@ def related_block(links):
       </div>
 '''
 
+def only_existing(links):
+    return [(href, text) for href, text in links if href in EXISTING_HTML]
+
 
 def get_links_index():
-    return [
+    return only_existing([
         ("hourly-to-salary.html", "Hourly to Salary"),
         ("salary-to-hourly.html", "Salary to Hourly"),
         ("15-dollar-an-hour-is-how-much-a-year.html", "$15 an hour"),
         ("20-dollar-an-hour-is-how-much-a-year.html", "$20 an hour"),
         ("25-dollar-an-hour-is-how-much-a-year.html", "$25 an hour"),
         ("70000-salary-after-tax.html", "$70k after tax"),
-    ]
+    ])
 
 
 def get_links_hourly_page(rate):
@@ -57,7 +62,7 @@ def get_links_hourly_page(rate):
         ("index.html", "Salary Calculator"),
         ("hourly-to-salary.html", "Hourly to Salary"),
     ])
-    return links[:6]
+    return only_existing(links)[:6]
 
 
 def get_links_hourly_after_tax(rate):
@@ -68,7 +73,7 @@ def get_links_hourly_after_tax(rate):
         ("index.html", "Salary Calculator"),
         ("25-an-hour-after-tax.html", "$25/hr after tax") if rate != 25 else ("30-an-hour-after-tax.html", "$30/hr after tax"),
     ])
-    return links[:6]
+    return only_existing(links)[:6]
 
 
 def get_links_salary_after_tax(sal):
@@ -80,39 +85,39 @@ def get_links_salary_after_tax(sal):
         ("index.html", "Salary Calculator"),
         ("25-an-hour-after-tax.html", "$25/hr after tax"),
     ])
-    return links[:6]
+    return only_existing(links)[:6]
 
 
 def get_links_hourly_to_salary():
-    return [
+    return only_existing([
         ("salary-to-hourly.html", "Salary to Hourly"),
         ("15-dollar-an-hour-is-how-much-a-year.html", "$15 an hour"),
         ("20-dollar-an-hour-is-how-much-a-year.html", "$20 an hour"),
         ("25-dollar-an-hour-is-how-much-a-year.html", "$25 an hour"),
         ("70000-salary-after-tax.html", "$70k after tax"),
         ("index.html", "Salary Calculator"),
-    ]
+    ])
 
 
 def get_links_salary_to_hourly():
-    return [
+    return only_existing([
         ("hourly-to-salary.html", "Hourly to Salary"),
         ("70000-salary-after-tax.html", "$70k after tax"),
         ("80000-salary-after-tax.html", "$80k after tax"),
         ("100k-salary-after-tax.html", "$100k after tax"),
         ("25-dollar-an-hour-is-how-much-a-year.html", "$25 an hour"),
         ("index.html", "Salary Calculator"),
-    ]
+    ])
 
 
 def get_links_simple():
-    return [
+    return only_existing([
         ("index.html", "Salary Calculator"),
         ("hourly-to-salary.html", "Hourly to Salary"),
         ("salary-to-hourly.html", "Salary to Hourly"),
         ("25-dollar-an-hour-is-how-much-a-year.html", "$25 an hour"),
         ("70000-salary-after-tax.html", "$70k after tax"),
-    ]
+    ])
 
 
 def add_section(path):

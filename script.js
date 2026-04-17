@@ -60,6 +60,12 @@
     const outMonthlyGross = container.querySelector('[data-output="monthly-gross"]');
     const outTax = container.querySelector('[data-output="tax-estimate"]');
     const outNet = container.querySelector('[data-output="net-yearly"]');
+    const resultsRegion = container.querySelector('.results-box, .results-section');
+
+    if (resultsRegion) {
+      resultsRegion.setAttribute('aria-live', 'polite');
+      resultsRegion.setAttribute('aria-atomic', 'true');
+    }
 
     let isUpdating = false;
     let lastEdited = 'hourly';
@@ -102,8 +108,18 @@
       isUpdating = false;
     }
 
-    if (hourlyInput) hourlyInput.addEventListener('input', () => update('hourly'));
-    if (yearlyInput) yearlyInput.addEventListener('input', () => update('yearly'));
+    if (hourlyInput) {
+      if (!hourlyInput.getAttribute('aria-label') && !container.querySelector(`label[for="${hourlyInput.id}"]`)) {
+        hourlyInput.setAttribute('aria-label', 'Hourly rate');
+      }
+      hourlyInput.addEventListener('input', () => update('hourly'));
+    }
+    if (yearlyInput) {
+      if (!yearlyInput.getAttribute('aria-label') && !container.querySelector(`label[for="${yearlyInput.id}"]`)) {
+        yearlyInput.setAttribute('aria-label', 'Annual salary');
+      }
+      yearlyInput.addEventListener('input', () => update('yearly'));
+    }
 
     update();
   }
